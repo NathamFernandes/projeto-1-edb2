@@ -90,11 +90,11 @@ void insert(Node **root, const Book book)
         return;
     }
 
-    // Se o id do livro for maior que o id do nó atual, insere recursivamente à esquerda.
+    // Se o id do livro for menor que o id do nó atual, insere recursivamente à esquerda.
     if (book.id < (*root)->book.id)
         insert(&(*root)->left, book);
 
-    // Se o id do livro for menor que o id do nó atual, insere recursivamente à direita.
+    // Se o id do livro for maior que o id do nó atual, insere recursivamente à direita.
     if (book.id > (*root)->book.id)
         insert(&(*root)->right, book);
 }
