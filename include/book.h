@@ -28,5 +28,6 @@ Node* load_books(const char *file_path, Node* root);
 void insert(Node** root, const Book book);
 void search_by_genre(Node* root, const char *genre);
 void show_books(Node* root);
+void deallocate(Node* root);
 
 #endif

@@ -17,8 +17,7 @@ int main(int argc, char *argv[])
 
     main_loop(library);
 
-    // show_books(library);
-    // search_by_genre(library, "Informatica");
+    deallocate(library);
 
     return EXIT_SUCCESS;
 }

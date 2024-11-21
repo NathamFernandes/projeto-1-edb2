@@ -189,3 +189,26 @@ void show_books(Node *root)
         show_books(root->right);
     }
 }
+
+/**
+ * @brief Libera a memória de uma árvore binária.
+ *
+ * Esta função recursivamente percorre a árvore binária, de baixo para cima, e libera a memória de cada nó.
+ * O processo de desalocação é feito em pós-ordem, ou seja, os filhos de cada nó são desalocados antes do próprio nó.
+ * 
+ * @param root Ponteiro para o nó raiz da árvore a ser desalocada.
+ */
+void deallocate(Node *root)
+{
+    // Caso base: se o nó atual for NULL, não há nada a fazer
+    if (root == NULL) return;
+
+    // Desaloca recursivamente o nó à esquerda da árvore
+    deallocate(root->left);
+
+    // Desaloca recursivamente o nó à direita da árvore
+    deallocate(root->right);
+
+    // Após desalocar os filhos (se houver), desalocamos o nó atual
+    free(root);
+}
