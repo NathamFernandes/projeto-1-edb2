@@ -1,13 +1,19 @@
 #ifndef BOOK_H
 #define BOOK_H
 
+#include <stddef.h>
+
 #define MAX_LEN 50
+
+//== Aliases
+
+typedef size_t hash_t;
 
 //== Structs
 
 // Representaçãp de um livro.
 typedef struct {
-    unsigned    id;                     //! Código único de um livro.
+    hash_t      id;                     //! Código único de um livro.
     char        title[MAX_LEN];         //! Titulo de um livro.
     char        author[MAX_LEN];        //! Autor de um livro.
     char        genre[MAX_LEN];         //! Gênero de um livro.
@@ -22,6 +28,10 @@ typedef struct node {
     struct node* left;      //! Ponteiro para o filho esquerdo do nó.
     struct node* right;     //! Ponteiro para o filho direito do nó.
 } Node;
+
+//== Aux functions
+
+hash_t generate_id();
 
 //== Main functions
 

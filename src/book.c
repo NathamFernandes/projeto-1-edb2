@@ -3,8 +3,38 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <time.h>
+#include <limits.h>
 
 #include "book.h"
+
+/**
+ * @brief Gera um ID único baseado em um valor aleatório e um algoritmo de mistura.
+ * 
+ * Esta função utiliza um gerador de números aleatórios para gerar um valor inicial,
+ * e depois aplica um algoritmo de mistura para modificar um valor de `seed` de forma
+ * que o ID gerado seja único e difícil de prever. O `seed` é uma variável estática,
+ * o que significa que ele é preservado entre chamadas subsequentes.
+ * 
+ * @return hash_t O valor de `seed` gerado, que serve como um ID único para o livro.
+ */
+hash_t generate_id() {
+    // Variável estática para armazenar o estado do 'seed' e preservar o valor entre chamadas.
+    static hash_t seed = 0;
+
+    // Gera um valor aleatório entre 1 e ULONG_MAX (máximo valor de unsigned long).
+    srand(time(NULL));
+    size_t random = (rand() % ULONG_MAX) + 1;
+
+    // Aplica uma mistura ao 'seed' para garantir que o próximo valor gerado seja único.
+    // 0x9e3779b9 é uma constante usada no algoritmo de mistura de valores.
+    // O operador XOR (^) embaralha o valor atual do 'seed' com o valor aleatório gerado.
+    // O deslocamento de bits (<< e >>) ajuda a garantir um melhor espalhamento do valor.
+    seed ^= random + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+
+    // Retorna o valor modificado de 'seed', que agora serve como um ID único.
+    return seed;
+}
 
 /**
  * @brief Inicializa a árvore de nós, retornando um ponteiro nulo.
@@ -62,7 +92,7 @@ static Node* create_node(const Book book)
  */
 static void show_book_info(const Book book)
 {
-    printf("Id: %d\n", book.id);
+    printf("Id: %zu\n", book.id);
     printf("Title: %s\n", book.title);
     printf("Author: %s\n", book.author);
     printf("Book Genre: %s\n", book.genre);
@@ -93,10 +123,11 @@ void insert(Node **root, const Book book)
     // Se o id do livro for menor que o id do nó atual, insere recursivamente à esquerda.
     if (book.id < (*root)->book.id)
         insert(&(*root)->left, book);
-
     // Se o id do livro for maior que o id do nó atual, insere recursivamente à direita.
-    if (book.id > (*root)->book.id)
+    else if (book.id > (*root)->book.id)
         insert(&(*root)->right, book);
+    else
+        fprintf(stderr, "Ja exite livro com esse id.\n");
 }
 
 /**
@@ -127,14 +158,16 @@ Node* load_books(const char* file_path, Node* root)
 
     // Lê cada linha do arquivo até o final.
     while (fgets(linha, sizeof(linha), input_file)) {
+        book.id = generate_id();
         // Tenta analisar os dados da linha e preencher a estrutura Book.
-        int success = sscanf(linha, "%u,%99[^,],%99[^,],%49[^,],%49[^,],%u,%u",
-                        &book.id, book.title, book.author, book.genre, book.publisher,
+        int success = sscanf(linha, "%99[^,],%99[^,],%49[^,],%49[^,],%u,%u",
+                        book.title, book.author, book.genre, book.publisher,
                         &book.pages, &book.year);
         
         // Se a linha foi lida com sucesso (7 campos), insere o livro na árvore.
-        if (success == 7)
+        if (success == 6) {
             insert(&root, book);
+        }
         //else
         //    fprintf(stderr, "Warning: Invalid format in line: %s", linha); // Aviso em caso de formato inválido.
     }
