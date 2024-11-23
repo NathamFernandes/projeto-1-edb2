@@ -15,10 +15,7 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-   // show_books(library);
-
-    //main_loop(library);
-
+    main_loop(library);
     deallocate(library);
 
     return EXIT_SUCCESS;
