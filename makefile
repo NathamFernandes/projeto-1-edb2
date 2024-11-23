@@ -13,11 +13,11 @@ BUILD = build
 
 all: build_dir
 	$(CXX) $(C_FLAGS) $(INCLUDE_PATH) $(C_SOURCES) -o $(BUILD)/$(PROGRAM)
-	./$(BUILD)/$(PROGRAM) "books.csv"
+	./$(BUILD)/$(PROGRAM) "seeders/books.csv"
 
 win: build_dir_win
 	$(CXX) $(C_FLAGS) $(INCLUDE_PATH_WIN) $(C_SOURCES) -o $(BUILD)/$(PROGRAM)
-	./$(BUILD)/$(PROGRAM) "books.csv"
+	./$(BUILD)/$(PROGRAM) "seeders/books.csv"
 
 run: 
 	./$(BUILD)/$(PROGRAM) "books.csv"
