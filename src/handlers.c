@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
 #include "handlers.h"
 
 /**
@@ -5,7 +9,7 @@
  *
  * @param library O nó raiz da biblioteca.
  */
-void handle_new_book(Node *library)
+Node *handle_new_book(Node *library)
 {
     Book new_book;
     char keys[6][64] = {
@@ -38,7 +42,16 @@ void handle_new_book(Node *library)
             scanf("%d", (int *)attributes[i]);
     }
 
+    if (library == NULL)
+    {
+        Node *new_node = create_node(new_book);
+        library = new_node;
+        return library;
+    }
+
     insert(&library, new_book);
+
+    return library;
 }
 
 /**
@@ -62,7 +75,7 @@ void handle_book_search(Node *library)
  *
  * @param library O nó raiz da biblioteca.
  */
-void handle_books_import(Node *library)
+Node *handle_books_import(Node *library)
 {
     char path[128] = "seeders/";
     char extension[8] = ".csv";
@@ -77,7 +90,9 @@ void handle_books_import(Node *library)
 
     printf("%s", path);
 
-    load_books(path, library);
+    library = load_books(path, library);
+
+    return library;
 }
 
 /**
@@ -88,13 +103,4 @@ void handle_books_import(Node *library)
 void handle_books_show(Node *library)
 {
     show_books(library);
-}
-
-/**
- * @brief Lida com a liberação de memória da biblioteca.
- *
- * @param library O nó raiz da biblioteca.
- */
-void handle_library_delete(Node *library)
-{
 }

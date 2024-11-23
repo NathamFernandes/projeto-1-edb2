@@ -61,7 +61,7 @@ Node *initialize()
  *
  * @return Ponteiro para o novo nó criado.
  */
-static Node *create_node(const Book book)
+Node *create_node(const Book book)
 {
     // Aloca memória para um novo nó.
     Node *new_node = (Node *)malloc(sizeof(Node));
@@ -259,10 +259,11 @@ void deallocate(Node *root)
 
     // Desaloca recursivamente o nó à esquerda da árvore
     deallocate(root->left);
+    free(root->left);
+    root->left = NULL;
 
     // Desaloca recursivamente o nó à direita da árvore
     deallocate(root->right);
-
-    // Após desalocar os filhos (se houver), desalocamos o nó atual
-    free(root);
+    free(root->right);
+    root->right = NULL;
 }
