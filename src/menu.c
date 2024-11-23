@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "menu.h"
 
 /**
@@ -28,19 +31,21 @@ void main_loop(Node *library)
         switch (option)
         {
         case 1:
-            handle_new_book(library);
+            library = handle_new_book(library);
             break;
         case 2:
             handle_book_search(library);
             break;
         case 3:
-            handle_books_import(library);
+            library = handle_books_import(library);
             break;
         case 4:
             handle_books_show(library);
             break;
         case 5:
-            handle_library_delete(library);
+            deallocate(library);
+            free(library);
+            library = NULL;
             break;
         }
     }

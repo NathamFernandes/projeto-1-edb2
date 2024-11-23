@@ -16,7 +16,6 @@ int main(int argc, char *argv[])
     }
 
     main_loop(library);
-    deallocate(library);
 
     return EXIT_SUCCESS;
 }
