@@ -2,6 +2,7 @@
 #define BOOK_H
 
 #include <stddef.h>
+#include <ctype.h>
 
 #define MAX_LEN 50
 

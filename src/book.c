@@ -198,8 +198,21 @@ void search_by_genre(Node *root, const char *genre)
     // Se o nó atual não for NULL, continua a busca.
     if (root != NULL)
     {
+        char aux_book_genre[64];
+        char aux_genre[64];
+
+        for (int i = 0; root->book.genre[i]; i++)
+        {
+            aux_book_genre[i] = tolower(root->book.genre[i]);
+        }
+
+        for (int i = 0; genre[i]; i++)
+        {
+            aux_genre[i] = tolower(genre[i]);
+        }
+
         // Se o gênero do livro no nó atual for igual ao gênero buscado, exibe as informações do livro.
-        if (strcmp(genre, root->book.genre) == 0)
+        if (strcmp(aux_book_genre, aux_genre) == 0)
             show_book_info(root->book);
 
         // Recursivamente busca à esquerda e à direita da árvore.

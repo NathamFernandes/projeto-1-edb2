@@ -41,19 +41,60 @@ void handle_new_book(Node *library)
     insert(&library, new_book);
 }
 
+/**
+ * @brief Lida com a procura de livros pelo gênero na biblioteca.
+ *
+ * @param library O nó raiz da biblioteca.
+ */
 void handle_book_search(Node *library)
 {
+    char genre[64];
+    getchar();
+
+    printf("Genero para pesquisa: ");
+    scanf("%63[^\n]", genre);
+
+    search_by_genre(library, genre);
 }
 
+/**
+ * @brief Lida com a importação de novos livros para a biblioteca.
+ *
+ * @param library O nó raiz da biblioteca.
+ */
 void handle_books_import(Node *library)
 {
+    char path[128] = "seeders/";
+    char extension[8] = ".csv";
+    char file[64];
+    getchar();
+
+    printf("Nome do arquivo (apenas) para importacao: ");
+    scanf("%63[^\n]", file);
+
+    strcat(path, file);
+    strcat(path, extension);
+
+    printf("%s", path);
+
+    load_books(path, library);
 }
 
+/**
+ * @brief Lida com a exibição dos livros da biblioteca.
+ *
+ * @param library O nó raiz da biblioteca.
+ */
 void handle_books_show(Node *library)
 {
     show_books(library);
 }
 
+/**
+ * @brief Lida com a liberação de memória da biblioteca.
+ *
+ * @param library O nó raiz da biblioteca.
+ */
 void handle_library_delete(Node *library)
 {
 }
