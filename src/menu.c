@@ -1,13 +1,20 @@
 #include "menu.h"
 
+/**
+ * @brief Loop do programa.
+ *
+ * @param library O nó raiz da biblioteca.
+ */
 void main_loop(Node *library)
 {
     int option;
 
     while (1)
     {
+        // Pega a opção do usuário.
         option = render_first_menu();
 
+        // Tratamento.
         if (option == 0)
             return;
 
@@ -17,6 +24,7 @@ void main_loop(Node *library)
             continue;
         }
 
+        // Handlers.
         switch (option)
         {
         case 1:
@@ -38,6 +46,11 @@ void main_loop(Node *library)
     }
 }
 
+/**
+ * @brief Handler da opção do usuário.
+ *
+ * @return A opção.
+ */
 int render_first_menu()
 {
     int option;
