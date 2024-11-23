@@ -32,6 +32,8 @@ typedef struct node
     struct node *right; //! Ponteiro para o filho direito do nó.
 } Node;
 
+Node *create_node(const Book book);
+
 //== Aux functions
 
 hash_t generate_id();

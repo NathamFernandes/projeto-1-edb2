@@ -2,13 +2,10 @@
 #define HANDLERS_H
 
 #include "book.h"
-#include <stdio.h>
-#include <string.h>
 
-void handle_new_book(Node *library);
+Node *handle_new_book(Node *library);
 void handle_book_search(Node *library);
-void handle_books_import(Node *library);
+Node *handle_books_import(Node *library);
 void handle_books_show(Node *library);
-void handle_library_delete(Node *library);
 
 #endif
