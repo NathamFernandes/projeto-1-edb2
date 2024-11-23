@@ -20,7 +20,7 @@ win: build_dir_win
 	./$(BUILD)/$(PROGRAM) "seeders/books.csv"
 
 run: 
-	./$(BUILD)/$(PROGRAM) "books.csv"
+	./$(BUILD)/$(PROGRAM) "seeders/books.csv"
 
 build_dir:
 	@if [ ! -d "$(BUILD)" ]; then \
