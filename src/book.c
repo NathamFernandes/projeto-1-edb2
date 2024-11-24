@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -84,26 +85,6 @@ Node *create_node(const Book book)
 }
 
 /**
- * @brief Exibe as informações de um livro.
- *
- * Esta função imprime no console os dados do livro (id, título, autor, gênero,
- * editora, ano e número de páginas).
- *
- * @param book Estrutura do tipo Book que contém as informações do livro.
- */
-static void show_book_info(const Book book)
-{
-    printf("Id: %zu\n", book.id);
-    printf("Title: %s\n", book.title);
-    printf("Author: %s\n", book.author);
-    printf("Book Genre: %s\n", book.genre);
-    printf("Publisher: %s\n", book.publisher);
-    printf("Year: %d\n", book.year);
-    printf("Pages: %d\n", book.pages);
-    printf("\n");
-}
-
-/**
  * @brief Insere um livro na árvore binária.
  *
  * A função insere um livro na árvore binária, de acordo com seu id. Livros com
@@ -129,7 +110,7 @@ void insert(Node **root, const Book book)
     else if (book.id > (*root)->book.id)
         insert(&(*root)->right, book);
     else
-        fprintf(stderr, "Ja exite livro com esse id.\n");
+        fprintf(stderr, "Este livro ja foi inserido na biblioteca.\n");
 }
 
 /**
@@ -152,7 +133,7 @@ Node *load_books(const char *file_path, Node *root)
     if (!input_file)
     {
         // Exibe uma mensagem de erro caso o arquivo não possa ser lido.
-        fprintf(stderr, "Unable to read file: %s.\n", strerror(errno));
+        fprintf(stderr, "Unable to read file \"%s\": %s.\n", file_path, strerror(errno));
         return NULL; // Retorna NULL em caso de erro ao abrir o arquivo.
     }
 
@@ -168,13 +149,9 @@ Node *load_books(const char *file_path, Node *root)
                              book.title, book.author, book.genre, book.publisher,
                              &book.pages, &book.year);
 
-        // Se a linha foi lida com sucesso (7 campos), insere o livro na árvore.
+        // Se a linha foi lida com sucesso (6 campos), insere o livro na árvore.
         if (success == 6)
-        {
             insert(&root, book);
-        }
-        // else
-        //     fprintf(stderr, "Warning: Invalid format in line: %s", linha); // Aviso em caso de formato inválido.
     }
 
     // Fecha o arquivo após terminar a leitura.
@@ -185,61 +162,94 @@ Node *load_books(const char *file_path, Node *root)
 }
 
 /**
- * @brief Busca e exibe todos os livros de um determinado gênero.
+ * @brief Converte uma string para minúsculas.
  *
- * A função percorre a árvore binária recursivamente e exibe as informações dos livros
- * que correspondem ao gênero especificado.
+ * Esta função recebe uma string como entrada e retorna uma nova string onde todos
+ * os caracteres alfabéticos foram convertidos para minúsculas. A string original
+ * não é modificada. A memória para a nova string é alocada dinamicamente e deve
+ * ser liberada pelo usuário após o uso.
  *
- * @param root Nó raiz da árvore binária.
- * @param genre Gênero dos livros a serem exibidos.
+ * @param str A string de entrada que será convertida para minúsculas.
+ * @return Uma nova string com todos os caracteres em minúsculas. Retorna NULL se
+ *         ocorrer um erro de alocação de memória.
  */
-void search_by_genre(Node *root, const char *genre)
+static char* strlower(const char* str) 
+{
+    // Aloca memória suficiente para a nova string, incluindo o caractere nulo '\0'
+    char* s = malloc(strlen(str) + 1);
+
+    // Verifica se a alocação foi bem-sucedida
+    if (s == NULL)
+        return NULL;
+
+    // Converte cada caractere para minúsculo
+    for (size_t i = 0; i < strlen(str); ++i)
+        s[i] = tolower(str[i]);
+
+    // Retorna a nova string com todos os caracteres em minúsculas
+    return s;
+}
+
+/**
+ * @brief Busca livros por gênero em uma árvore binária e exibe os encontrados.
+ * 
+ * Esta função percorre recursivamente uma árvore binária, buscando livros cujo gênero 
+ * seja igual ao gênero fornecido como parâmetro. Quando um livro com o gênero correspondente 
+ * é encontrado, a função indicada no parâmetro `print` é chamada para exibir as informações 
+ * do livro. A travessia da árvore é feita em pré-ordem (processando o nó atual antes dos filhos).
+ * 
+ * @param root Ponteiro para o nó raiz da árvore binária.
+ * @param genre O gênero do livro a ser buscado na árvore. A busca é feita de forma case-insensitive.
+ * @param print Função que será chamada para imprimir as informações do livro encontrado. 
+ *
+ */
+void search_by_genre(Node *root, const char *genre, void (*print)(const Book book))
 {
     // Se o nó atual não for NULL, continua a busca.
     if (root != NULL)
     {
-        char aux_book_genre[64];
-        char aux_genre[64];
-
-        for (int i = 0; root->book.genre[i]; i++)
-        {
-            aux_book_genre[i] = tolower(root->book.genre[i]);
-        }
-
-        for (int i = 0; genre[i]; i++)
-        {
-            aux_genre[i] = tolower(genre[i]);
-        }
+        // Converte o gênero do livro e o gênero de busca para minúsculas.
+        char *aux_book_genre = strlower(root->book.genre);
+        char *aux_genre = strlower(genre);
 
         // Se o gênero do livro no nó atual for igual ao gênero buscado, exibe as informações do livro.
-        if (strcmp(aux_book_genre, aux_genre) == 0)
-            show_book_info(root->book);
+        if (strcmp(aux_genre, aux_book_genre) == 0)
+            print(root->book);
+
+        // Libera a memória alocada para as versões minúsculas das strings.
+        free(aux_book_genre);
+        free(aux_genre);
 
         // Recursivamente busca à esquerda e à direita da árvore.
-        search_by_genre(root->left, genre);
-        search_by_genre(root->right, genre);
+        search_by_genre(root->left, genre, print);
+        search_by_genre(root->right, genre, print);
     }
 }
 
 /**
- * @brief Exibe as informações de todos os livros na árvore.
- *
- * Esta função percorre a árvore binária de forma recursiva e exibe as informações
- * de todos os livros presentes na árvore.
- *
- * @param root Nó raiz da árvore binária.
+ * @brief Exibe os livros de uma árvore binária de forma recursiva.
+ * 
+ * Esta função percorre recursivamente uma árvore binária, exibindo as informações 
+ * de cada livro armazenado em cada nó. Para cada nó, a função indicada no parâmetro 
+ * `print` será chamada para exibir os dados do livro. A travessia da árvore segue a 
+ * ordem pré-ordem, ou seja, o nó atual é processado antes de seus filhos esquerdo e direito.
+ * 
+ * @param root Ponteiro para o nó raiz da árvore binária.
+ * @param print Função que será usada para imprimir as informações do livro armazenado 
+ *              no nó.
+ * 
  */
-void show_books(Node *root)
+void show_books(Node *root, void (*print)(const Book book))
 {
     // Se o nó atual não for NULL, continua a exibição.
     if (root != NULL)
     {
         // Exibe as informações do livro no nó atual.
-        show_book_info(root->book);
+        print(root->book);
 
         // Recursivamente exibe os livros à esquerda e à direita da árvore.
-        show_books(root->left);
-        show_books(root->right);
+        show_books(root->left, print);
+        show_books(root->right, print);
     }
 }
 

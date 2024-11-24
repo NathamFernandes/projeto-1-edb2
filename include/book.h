@@ -32,11 +32,13 @@ typedef struct node
     struct node *right; //! Ponteiro para o filho direito do nó.
 } Node;
 
-Node *create_node(const Book book);
 
 //== Aux functions
 
+// Gera um codigo unico para um livro inserido na árvore.
 hash_t generate_id();
+// Cria um novo nó na árvore.
+Node *create_node(const Book book);
 
 //== Main functions
 
@@ -47,9 +49,9 @@ Node *load_books(const char *file_path, Node *root);
 // Insere um livro na árvore.
 void insert(Node **root, const Book book);
 // Busca por todos os livros de um determinado gênero.
-void search_by_genre(Node *root, const char *genre);
+void search_by_genre(Node *root, const char *genre, void (*print)(const Book book));
 // Lista todos os livros da árvore.
-void show_books(Node *root);
+void show_books(Node *root, void (*print)(const Book));
 // Desaloca toda a árvore binária.
 void deallocate(Node *root);
 
