@@ -143,14 +143,14 @@ Node *load_books(const char *file_path, Node *root)
     // Lê cada linha do arquivo até o final.
     while (fgets(linha, sizeof(linha), input_file))
     {
-        book.id = generate_id();
+        //book.id = generate_id();
         // Tenta analisar os dados da linha e preencher a estrutura Book.
-        int success = sscanf(linha, "%99[^,],%99[^,],%49[^,],%49[^,],%u,%u",
-                             book.title, book.author, book.genre, book.publisher,
-                             &book.pages, &book.year);
+        int success = sscanf(linha, "%lu,%99[^,],%99[^,],%49[^,],%u,%49[^,],%u",
+                             &book.id, book.title, book.author, book.genre, &book.year,
+                             book.publisher, &book.pages);
 
-        // Se a linha foi lida com sucesso (6 campos), insere o livro na árvore.
-        if (success == 6)
+        // Se a linha foi lida com sucesso (7 campos), insere o livro na árvore.
+        if (success == 7)
             insert(&root, book);
     }
 

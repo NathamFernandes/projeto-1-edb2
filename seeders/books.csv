@@ -1,50 +1,30 @@
-Introducao a Programacao,Joao Silva,Informatica,Editora X,350,2020
-Aprendendo C,Maria Oliveira,Informatica,Editora Y,450,2018
-Fisica para Iniciantes,Pedro Almeida,Academia,Editora Z,500,2015
-Historia do Brasil,Luis Souza,Historia,Editora A,300,2010
-Redes de Computadores,Carlos Tannenbaum,Informatica,Editora B,400,2012
-Matematica para Todos,Mariana Santos,Matematica,Editora C,320,2017
-Psicologia Moderna,Andre Costa,Psicologia,Editora D,280,2016
-A Arte da Guerra,Suntzu,Historia,Editora E,180,2005
-Algoritmos Avancados,Fernando Lima,Informatica,Editora F,420,2019
-Programacao C++,Roberta Ferreira,Informatica,Editora G,370,2021
-O Poder do Habito,Charles Duhigg,Psicologia,Editora H,350,2012
-A Revolucao dos Bichos,George Orwell,Romance,Editora I,250,1945
-O Senhor dos Aneis,J.R.R. Tolkien,Fantasia,Editora J,1200,1954
-1984,George Orwell,Distopia,Editora K,328,1949
-O Codigo Da Vinci,Dan Brown,Thriller,Editora L,500,2003
-Engenharia de Software,James Martin,Informatica,Editora M,450,1999
-A Guerra dos Tronos,George R.R. Martin,Fantasia,Editora N,800,1996
-Pequeno Principe,Antoine de Saint-Exupery,Infantil,Editora O,96,1943
-Principe Maquiavel,Nicolau Maquiavel,Politica,Editora P,220,1532
-Crime e Castigo,Fiodor Dostoievski,Romance,Editora Q,650,1866
-O Hobbit,J.R.R. Tolkien,Fantasia,Editora R,320,1937
-O Lobo de Wall Street,Jordan Belfort,Memorias,Editora S,500,2007
-Mundo Pos-Apocaliptico,John Smith,Distopia,Editora T,380,2014
-Introducao a Fisica,Henrique Costa,Academia,Editora U,400,2002
-Historia Antiga,Isabela Martins,Historia,Editora V,320,2010
-A Arte de Programar,Alan Turing,Informatica,Editora W,450,1950
-Como Fazer Amigos,Carnegie Dale,Psicologia,Editora X,350,1936
-O Silencio dos Inocentes,Thomas Harris,Thriller,Editora Y,450,1988
-Harry Potter e a Pedra Filosofal,J.K. Rowling,Fantasia,Editora Z,350,1997
-Software Design Patterns,Erich Gamma,Informatica,Editora A,520,1994
-Memorias Postumas de Bras Cubas,Machado de Assis,Classico,Editora B,300,1881
-O Conto da Aia,Margaret Atwood,Distopia,Editora C,400,1985
-Fundamentos de C++,Bjarne Stroustrup,Informatica,Editora D,600,1997
-Aprendendo JavaScript,Jose Almeida,Informatica,Editora E,350,2015
-O Guia do Mochileiro das Galaxias,Douglas Adams,Ficcao Cientifica,Editora F,350,1979
-A Biblia,Desconhecido,Religiao,Editora G,1000,50
-Dracula,Bram Stoker,Fantasia,Editora H,400,1897
-Conceitos de Matematica,Renata Souza,Matematica,Editora I,350,2012
-Inteligencia Emocional,Daniel Goleman,Psicologia,Editora J,400,1995
-A Fuga de Alcatraz,Frank Morris,Aventura,Editora K,320,1962
-Fundamentos de Banco de Dados,Elmasri,Navathe,Informatica,Editora L,550,2010
-Desenvolvimento de Jogos,Michael Morrison,Informatica,Editora M,380,2016
-Codigos e Cifras,David Kahn,Historia,Editora N,420,1996
-Alquimia e Magia,Michael Moorcock,Fantasia,Editora O,500,2003
-Os Miseraveis,Victor Hugo,Romance,Editora P,1400,1862
-A Biblia de Programacao,David Gries,Informatica,Editora Q,700,1991
-Os Irmaos Karamazov,Fiodor Dostoievski,Romance,Editora R,850,1880
-Segredos da Mente,Carl Jung,Psicologia,Editora S,420,1953
-Introducao a Analise de Sistemas,Louis O. Kelso,Informatica,Editora T,350,1998
-A Arte do Guerreiro,Carlos Castaneda,Filosofia,Editora U,300,1973
+327,As Aventuras de Sherlock Holmes,Arthur Conan Doyle,Misterio,1892,Editora A,307  
+158,Orgulho e Preconceito,Jane Austen,Romance,1813,Editora B,279  
+702,1984,George Orwell,Ficcao Cientifica,1949,Editora C,328  
+911,O Senhor dos Aneis,J.R.R. Tolkien,Fantasia,1954,Editora D,1216  
+416,Dom Quixote,Miguel de Cervantes,Classico,1605,Editora E,863  
+248,O Morro dos Ventos Uivantes,Emily Bronte,Romance,1847,Editora F,416  
+370,Fahrenheit 451,Ray Bradbury,Ficcao Cientifica,1953,Editora G,158  
+522,Dracula,Bram Stoker,Terror,1897,Editora H,418  
+633,Jane Eyre,Charlotte Bronte,Romance,1847,Editora I,507  
+235,A Revolucao dos Bichos,George Orwell,Satirico,1945,Editora J,112  
+144,Frankenstein,Mary Shelley,Terror,1818,Editora K,280  
+875,O Apanhador no Campo de Centeio,J.D. Salinger,Ficcao,1951,Editora L,214  
+599,O Grande Gatsby,F. Scott Fitzgerald,Romance,1925,Editora M,180  
+782,Moby Dick,Herman Melville,Aventura,1851,Editora N,635  
+931,Cem Anos de Solidao,Gabriel Garcia Marquez,Realismo Magico,1967,Editora O,417  
+841,Os Miseraveis,Victor Hugo,Classico,1862,Editora P,1463  
+672,As Cronicas de Narnia,C.S. Lewis,Fantasia,1950,Editora Q,778  
+301,A Metamorfose,Franz Kafka,Ficcao,1915,Editora R,201  
+539,Admiravel Mundo Novo,Aldous Huxley,Ficcao Cientifica,1932,Editora S,311  
+627,A Divina Comedia,Dante Alighieri,Classico,1320,Editora T,432  
+105,Memorias Postumas de Bras Cubas,Machado de Assis,Classico,1881,Editora U,192  
+241,Grande Sertao: Veredas,Joao Guimaraes Rosa,Ficcao,1956,Editora V,624  
+464,Vidas Secas,Graciliano Ramos,Ficcao,1938,Editora W,175  
+550,Dom Casmurro,Machado de Assis,Romance,1899,Editora X,256  
+378,O Cortico,Aluisio Azevedo,Romance,1890,Editora Y,256  
+245,Crime e Castigo,Fiodor Dostoiévski,Ficcao Psicologica,1866,Editora Z,671  
+846,Os Irmaos Karamazov,Fiodor Dostoiévski,Filosofia,1880,Editora AA,840  
+219,Guerra e Paz,Leon Tolstoi,Classico,1869,Editora BB,1225  
+512,Anna Karienina,Leon Tolstoi,Romance,1877,Editora CC,864  
+154,O Processo,Franz Kafka,Ficcao Psicologica,1925,Editora DD,288
