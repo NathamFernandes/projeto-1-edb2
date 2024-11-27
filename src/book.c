@@ -10,32 +10,58 @@
 #include "book.h"
 
 /**
- * @brief Gera um ID único baseado em um valor aleatório e um algoritmo de mistura.
+ * @brief Verifica se um ID existe na árvore binária de busca.
  *
- * Esta função utiliza um gerador de números aleatórios para gerar um valor inicial,
- * e depois aplica um algoritmo de mistura para modificar um valor de `seed` de forma
- * que o ID gerado seja único e difícil de prever. O `seed` é uma variável estática,
- * o que significa que ele é preservado entre chamadas subsequentes.
+ * Esta função realiza uma busca recursiva para verificar se o ID especificado 
+ * está presente em qualquer nó da árvore binária de busca.
  *
- * @return hash_t O valor de `seed` gerado, que serve como um ID único para o livro.
+ * @param root Ponteiro para o nó raiz da árvore binária de busca.
+ * @param id O ID a ser procurado na árvore.
+ * @return true Se o ID for encontrado na árvore.
+ * @return false Se o ID não for encontrado na árvore.
  */
-hash_t generate_id()
+static bool exists(Node* root, unsigned id)
 {
-    // Variável estática para armazenar o estado do 'seed' e preservar o valor entre chamadas.
-    static hash_t seed = 0;
+    // Caso base: se a árvore está vazia, o ID não existe.
+    if (root == NULL)
+        return false;
 
-    // Gera um valor aleatório entre 1 e ULONG_MAX (máximo valor de unsigned long).
-    srand(time(NULL));
-    size_t random = (rand() % ULONG_MAX) + 1;
+    if (root->book.id == id)
+        return true;
+    else if (id < root->book.id)
+        return exists(root->left, id);
+    else
+        return exists(root->right, id);
+}
 
-    // Aplica uma mistura ao 'seed' para garantir que o próximo valor gerado seja único.
-    // 0x9e3779b9 é uma constante usada no algoritmo de mistura de valores.
-    // O operador XOR (^) embaralha o valor atual do 'seed' com o valor aleatório gerado.
-    // O deslocamento de bits (<< e >>) ajuda a garantir um melhor espalhamento do valor.
-    seed ^= random + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+/**
+ * @brief Gera um ID único entre 100 e 1000.
+ *
+ * Esta função gera um ID aleatório no intervalo [100, 1000] e verifica se esse ID
+ * já existe na árvore binária de busca. Se o ID já existir, a função tenta gerar
+ * um novo ID de forma recursiva. A função continua até gerar um ID único.
+ *
+ * @param root Ponteiro para o nó raiz da árvore binária de busca onde a busca será realizada.
+ * @return O novo ID gerado, garantido como único na árvore.
+ * 
+ * @note A função utiliza a função `exists` para verificar se o ID gerado já existe na árvore.
+ *       A função de geração de números aleatórios é inicializada com a semente do tempo usando `srand(time(NULL))`.
+ */
+unsigned short generate_id(Node* root)
+{
+    int min = 100;  ///< Valor mínimo do intervalo de geração de IDs.
+    int max = 1000; ///< Valor máximo do intervalo de geração de IDs.
 
-    // Retorna o valor modificado de 'seed', que agora serve como um ID único.
-    return seed;
+    srand(time(NULL));  ///< Inicializa o gerador de números aleatórios com a semente do tempo.
+
+    // Gera um ID aleatório no intervalo [100, 1000].
+    int new_id = rand() % (max - min + 1) + min;
+
+    // Verifica se o ID já existe na árvore, e se existir, tenta gerar um novo ID.
+    if (exists(root, new_id)) 
+        return generate_id(root);  ///< Chamada recursiva para tentar gerar um ID único.
+
+    return new_id;  ///< Retorna o ID gerado que é único na árvore.
 }
 
 /**
@@ -145,7 +171,7 @@ Node *load_books(const char *file_path, Node *root)
     {
         //book.id = generate_id();
         // Tenta analisar os dados da linha e preencher a estrutura Book.
-        int success = sscanf(linha, "%lu,%99[^,],%99[^,],%49[^,],%u,%49[^,],%u",
+        int success = sscanf(linha, "%hu,%99[^,],%99[^,],%49[^,],%u,%49[^,],%u",
                              &book.id, book.title, book.author, book.genre, &book.year,
                              book.publisher, &book.pages);
 

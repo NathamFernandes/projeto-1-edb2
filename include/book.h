@@ -6,16 +6,12 @@
 
 #define MAX_LEN 50
 
-//== Aliases
-
-typedef size_t hash_t;
-
 //== Structs
 
 // Representaçãp de um livro.
 typedef struct
 {
-    hash_t id;               //! Código único de um livro.
+    unsigned short id;       //! Código único de um livro.
     char title[MAX_LEN];     //! Titulo de um livro.
     char author[MAX_LEN];    //! Autor de um livro.
     char genre[MAX_LEN];     //! Gênero de um livro.
@@ -36,7 +32,7 @@ typedef struct node
 //== Aux functions
 
 // Gera um codigo unico para um livro inserido na árvore.
-hash_t generate_id();
+unsigned short generate_id();
 // Cria um novo nó na árvore.
 Node *create_node(const Book book);
 

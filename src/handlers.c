@@ -68,7 +68,7 @@ static void draw_table_header()
 static void draw_row(Book book)
 {
     printf("|");
-    printf(" %-*zu | %-*s | %-*s | %-*s | %-*s | %-*u | %-*u |\n", 
+    printf(" %-*hu | %-*s | %-*s | %-*s | %-*s | %-*u | %-*u |\n", 
        ID_COLUMN_LENGTH - 2,        book.id, 
        TITLE_COLUMN_LENGTH - 2,     book.title, 
        AUTHOR_COLUMN_LENGTH - 2,    book.author, 
@@ -105,7 +105,6 @@ Node *handle_new_book(Node *library)
         &new_book.year,
     };
 
-    new_book.id = generate_id();
 
     for (int i = 0; i < 6; i++)
     {
@@ -117,13 +116,7 @@ Node *handle_new_book(Node *library)
             scanf("%d", (int *)attributes[i]);
     }
 
-    if (library == NULL)
-    {
-        Node *new_node = create_node(new_book);
-        library = new_node;
-        return library;
-    }
-
+    new_book.id = generate_id();
     insert(&library, new_book);
 
     return library;
