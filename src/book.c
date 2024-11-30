@@ -20,7 +20,7 @@
  * @return true Se o ID for encontrado na árvore.
  * @return false Se o ID não for encontrado na árvore.
  */
-static bool exists(Node* root, unsigned id)
+bool exists(Node* root, unsigned id)
 {
     // Caso base: se a árvore está vazia, o ID não existe.
     if (root == NULL)
@@ -54,8 +54,8 @@ unsigned short generate_id(Node* root)
 
     srand(time(NULL));  ///< Inicializa o gerador de números aleatórios com a semente do tempo.
 
-    // Gera um ID aleatório no intervalo [100, 1000].
-    int new_id = rand() % (max - min + 1) + min;
+    // Gera um ID aleatório no intervalo [100, 1000).
+    int new_id = rand() % (max - min) + min;
 
     // Verifica se o ID já existe na árvore, e se existir, tenta gerar um novo ID.
     if (exists(root, new_id)) 
@@ -295,11 +295,6 @@ void deallocate(Node *root)
 
     // Desaloca recursivamente o nó à esquerda da árvore
     deallocate(root->left);
-    free(root->left);
-    root->left = NULL;
-
     // Desaloca recursivamente o nó à direita da árvore
     deallocate(root->right);
-    free(root->right);
-    root->right = NULL;
 }

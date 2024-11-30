@@ -3,6 +3,7 @@
 
 #include <stddef.h>
 #include <ctype.h>
+#include <stdbool.h>
 
 #define MAX_LEN 50
 
@@ -35,6 +36,8 @@ typedef struct node
 unsigned short generate_id();
 // Cria um novo nó na árvore.
 Node *create_node(const Book book);
+// Verifica se um nó existe na arvore.
+bool exists(Node* root, unsigned id);
 
 //== Main functions
 
