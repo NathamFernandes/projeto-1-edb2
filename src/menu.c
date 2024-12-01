@@ -17,11 +17,7 @@ void main_loop(Node *library)
         // Pega a opção do usuário.
         option = render_first_menu();
 
-        // Tratamento.
-        if (option == 0)
-            return;
-
-        if (option < 0 || option > 5)
+        if (option < 1 || option > 5)
         {
             printf("\nOpcao invalida!\n");
             continue;
@@ -44,9 +40,7 @@ void main_loop(Node *library)
             break;
         case 5:
             deallocate(library);
-            free(library);
-            library = NULL;
-            break;
+            return;
         }
     }
 }
@@ -60,7 +54,7 @@ int render_first_menu()
 {
     int option;
 
-    printf("\n0 - Encerrar programa\n1 - Inserir um novo livro\n2 - Buscar livro por genero\n3 - Carregar livros por CSV\n4 - Exibir livros\n5 - Fechar biblioteca\n\nOpcao: ");
+    printf("\n1 - Inserir um novo livro\n2 - Buscar livro por genero\n3 - Carregar livros por CSV\n4 - Exibir livros\n5 - Fechar biblioteca\n\nOpcao: ");
 
     scanf("%d", &option);
 

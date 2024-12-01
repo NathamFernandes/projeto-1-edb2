@@ -1,4 +1,4 @@
-PROGRAM = app
+PROGRAM = library
 
 CXX = gcc
 
