@@ -15,9 +15,9 @@
 
 /**
  * @brief Desenha uma linha horizontal de caracteres '-'.
- * 
- * Esta função imprime uma linha de caracteres '-' de comprimento 
- * definido pela constante HORIZONTAL_LINE_LENGTH, seguida por uma 
+ *
+ * Esta função imprime uma linha de caracteres '-' de comprimento
+ * definido pela constante HORIZONTAL_LINE_LENGTH, seguida por uma
  * quebra de linha. Usada para separar seções na saída da tabela.
  */
 static void draw_horizontal_line()
@@ -29,11 +29,11 @@ static void draw_horizontal_line()
 
 /**
  * @brief Desenha o cabeçalho da tabela.
- * 
- * Esta função chama a função `draw_horizontal_line()` para desenhar uma 
- * linha horizontal no topo da tabela e, em seguida, imprime o cabeçalho 
- * com os títulos das colunas ("Id", "Title", "Author", "Genre", "Publisher", 
- * "Year", "Pages"). Após a impressão do cabeçalho, outra linha horizontal 
+ *
+ * Esta função chama a função `draw_horizontal_line()` para desenhar uma
+ * linha horizontal no topo da tabela e, em seguida, imprime o cabeçalho
+ * com os títulos das colunas ("Id", "Title", "Author", "Genre", "Publisher",
+ * "Year", "Pages"). Após a impressão do cabeçalho, outra linha horizontal
  * é desenhada no final.
  */
 static void draw_table_header()
@@ -41,41 +41,41 @@ static void draw_table_header()
     draw_horizontal_line();
 
     printf("|");
-    printf(" %-*s | %-*s | %-*s | %-*s | %-*s | %-*s | %-*s |\n", 
-       ID_COLUMN_LENGTH - 2,        "Id", 
-       TITLE_COLUMN_LENGTH - 2,     "Title", 
-       AUTHOR_COLUMN_LENGTH - 2,    "Author", 
-       GENRE_COLUMN_LENGHT - 2,     "Genre", 
-       PUBLISHER_COLUMN_LENGTH - 2, "Publisher", 
-       YEAR_COLUMN_LENGTH - 2,      "Year", 
-       PAGES_COLUMN_LENGTH - 2,     "Pages");
+    printf(" %-*s | %-*s | %-*s | %-*s | %-*s | %-*s | %-*s |\n",
+           ID_COLUMN_LENGTH - 2, "Id",
+           TITLE_COLUMN_LENGTH - 2, "Title",
+           AUTHOR_COLUMN_LENGTH - 2, "Author",
+           GENRE_COLUMN_LENGHT - 2, "Genre",
+           PUBLISHER_COLUMN_LENGTH - 2, "Publisher",
+           YEAR_COLUMN_LENGTH - 2, "Year",
+           PAGES_COLUMN_LENGTH - 2, "Pages");
 
     draw_horizontal_line();
 }
 
 /**
  * @brief Desenha uma linha da tabela com os dados de um livro.
- * 
- * Esta função imprime uma linha da tabela com os dados de um livro, 
- * incluindo o ID, título, autor, gênero, editora, ano de publicação 
- * e número de páginas. Ela usa a largura definida para cada coluna 
+ *
+ * Esta função imprime uma linha da tabela com os dados de um livro,
+ * incluindo o ID, título, autor, gênero, editora, ano de publicação
+ * e número de páginas. Ela usa a largura definida para cada coluna
  * para garantir que a formatação da tabela esteja alinhada corretamente.
- * Após imprimir a linha, a função `draw_horizontal_line()` é chamada 
+ * Após imprimir a linha, a função `draw_horizontal_line()` é chamada
  * para desenhar uma linha horizontal ao final.
- * 
+ *
  * @param book O livro cujos dados serão exibidos na linha da tabela.
  */
 static void draw_row(Book book)
 {
     printf("|");
-    printf(" %-*hu | %-*s | %-*s | %-*s | %-*s | %-*u | %-*u |\n", 
-       ID_COLUMN_LENGTH - 2,        book.id, 
-       TITLE_COLUMN_LENGTH - 2,     book.title, 
-       AUTHOR_COLUMN_LENGTH - 2,    book.author, 
-       GENRE_COLUMN_LENGHT - 2,     book.genre, 
-       PUBLISHER_COLUMN_LENGTH - 2, book.publisher, 
-       YEAR_COLUMN_LENGTH - 2,      book.year, 
-       PAGES_COLUMN_LENGTH,         book.pages);
+    printf(" %-*hu | %-*s | %-*s | %-*s | %-*s | %-*u | %-*u |\n",
+           ID_COLUMN_LENGTH - 2, book.id,
+           TITLE_COLUMN_LENGTH - 2, book.title,
+           AUTHOR_COLUMN_LENGTH - 2, book.author,
+           GENRE_COLUMN_LENGHT - 2, book.genre,
+           PUBLISHER_COLUMN_LENGTH - 2, book.publisher,
+           YEAR_COLUMN_LENGTH - 2, book.year,
+           PAGES_COLUMN_LENGTH, book.pages);
 
     draw_horizontal_line();
 }
@@ -104,7 +104,6 @@ Node *handle_new_book(Node *library)
         &new_book.pages,
         &new_book.year,
     };
-
 
     for (int i = 0; i < 6; i++)
     {
@@ -157,7 +156,7 @@ Node *handle_books_import(Node *library)
     strcat(path, file);
     strcat(path, extension);
 
-    printf("%s", path);
+    printf("\nImportando %s\n", path);
 
     library = load_books(path, library);
 
